@@ -13,7 +13,7 @@ public class DashboardResponse {
 
 	public void setTotalEnq(Integer totalEnq) {
 		this.totalEnq = totalEnq;
-	}
+	} 
 
 	public Integer getOpenEnq() {
 		return openEnq;
