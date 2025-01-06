@@ -1,5 +1,5 @@
 package in.kunal.Service;
 
-interface  EnqService {
+public interface  EnqService {
 
 }

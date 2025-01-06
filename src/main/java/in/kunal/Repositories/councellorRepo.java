@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import in.kunal.Entities.Councellor;
 
-interface  councellorRepo extends JpaRepository<Councellor, Integer> {
+public interface  councellorRepo extends JpaRepository<Councellor, Integer> {
+	
+// SELECT email, password FROM Councellor WHERE email:= email AND password:= password
+	public String findByNameAndPassword(String email, String password);
 
 }
