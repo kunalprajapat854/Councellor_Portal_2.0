@@ -22,8 +22,9 @@ public class CouncellorServiceImplement implements CouncellorService {
 	}
 
 	@Override
-	public String login(String email, String password) {
-		return councellorrepo.findByNameAndPassword(email, password);
+	public Councellor login(String email, String password) {
+		  Councellor emailpwd = councellorrepo.findByNameAndPassword(email, password);
+		  return emailpwd;
 	}
 
 }

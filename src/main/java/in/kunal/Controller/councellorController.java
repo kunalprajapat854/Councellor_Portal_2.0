@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import in.kunal.Entities.Councellor;
 import in.kunal.Service.CouncellorServiceImplement;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class councellorController {
@@ -25,10 +27,16 @@ public class councellorController {
 	}
 	
 	@PostMapping("/login")
-	public String login(Model model, @ModelAttribute String email, String password) {
-	 String login = councellorservice.login(email, password);
-	 model.addAttribute("login", login);
-	 return "login";
+	public String login(Model model, Councellor councellor , HttpServletRequest req ) {
+	 Councellor login = councellorservice.login(councellor.getEmail(), councellor.getPassword());
+	 if(login==null) {
+		 model.addAttribute("emsg" , "Invalid Credentials");
+		 return "login";
+	 } else {
+		   HttpSession session = req.getSession(true);
+		   session.setAttribute("CouncellorId", login);
+	 }
+	 return "redirect:/register";
 	}
 	
 	@GetMapping("/register")

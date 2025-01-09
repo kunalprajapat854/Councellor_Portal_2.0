@@ -7,6 +7,6 @@ import in.kunal.Entities.Councellor;
 public interface  councellorRepo extends JpaRepository<Councellor, Integer> {
 	
 // SELECT email, password FROM Councellor WHERE email:= email AND password:= password
-	public String findByNameAndPassword(String email, String password);
+	public Councellor findByNameAndPassword(String email, String password);
 
 }

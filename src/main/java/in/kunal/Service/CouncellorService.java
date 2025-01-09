@@ -8,6 +8,6 @@ interface  CouncellorService {
 	public boolean  register(Councellor councellor);
 	
 	//log into councellor account using login method.
-	public String login(String email, String password);
+	public Councellor login(String email, String password);
 
 }
