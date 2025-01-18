@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import in.kunal.Entities.Councellor;
+import in.kunal.Repositories.enquiryRepo;
+import in.kunal.Response.DashboardResponse;
 import in.kunal.Service.CouncellorServiceImplement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,39 +24,24 @@ public class councellorController {
 	@GetMapping("/")
 	public String loadLoginform(Model model) {
 		Councellor councellor = new Councellor();
+//		Sending data to controller to UI using Model is map send data in key value format
 		model.addAttribute("councellor", councellor);
-		return "login";
+		return "index";
 	}
-	
+
 	@PostMapping("/login")
-	public String login(Model model, Councellor councellor , HttpServletRequest req ) {
-	 Councellor login = councellorservice.login(councellor.getEmail(), councellor.getPassword());
-	 if(login==null) {
-		 model.addAttribute("emsg" , "Invalid Credentials");
-		 return "login";
-	 } else {
-		   HttpSession session = req.getSession(true);
-		   session.setAttribute("CouncellorId", login);
-	 }
-	 return "redirect:/register";
-	}
-	
-	@GetMapping("/register")
-	public String loadRegisterform(Model model) {
-		Councellor councellor = new Councellor();
-		model.addAttribute("register", councellor);
-		return "register";
-	}
-	
-	@PostMapping("/registration")
-	public String register(Model model , @RequestBody Councellor councellor) {
-		boolean register = councellorservice.register(councellor);
-		if(register) {
-			 model.addAttribute("smsg", "Registration Saved");
+	public String login(Model model, Councellor councellor) {
+		Councellor login = councellorservice.login(councellor.getEmail(), councellor.getPassword());
+		if (login == null) {
+			model.addAttribute("emsg", "Invalid Credentials");
+			return "index";
 		} else {
-			model.addAttribute("emsg", "Registration Failed");
+			DashboardResponse response = councellorservice.response(login.getCouncellorId());
+			model.addAttribute("dashobj", response);
+			return "dashboard"; 
+
 		}
-		return "register";
+
 	}
 
 }

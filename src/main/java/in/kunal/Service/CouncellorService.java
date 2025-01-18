@@ -1,6 +1,7 @@
 package in.kunal.Service;
 
 import in.kunal.Entities.Councellor;
+import in.kunal.Response.DashboardResponse;
 
 interface  CouncellorService {
 	
@@ -9,5 +10,7 @@ interface  CouncellorService {
 	
 	//log into councellor account using login method.
 	public Councellor login(String email, String password);
+	
+	public DashboardResponse response (Integer CouncellorId);
 
 }
